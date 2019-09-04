@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chenglian.dao.AccountDao">
+
+    <insert id="add" parameterType="Account">
+        insert into account (id,account,password,grade,create_time) values (#{id},#{account},#{password},#{grade},#{createTime})
+    </insert>
+
+    <select id="selectByAccount" resultType="Account">
+        select id,account,password,grade,create_time from account where account = #{account}
+    </select>
+
+    <select id="selectByAccountAndPassword" resultType="Account">
+        select id,account,password,grade,create_time from account where account = #{account} and password = #{password}
+    </select>
+
+    <select id="selectAll" resultType="Account">
+        select id,account,password,grade,create_time from account
+    </select>
+</mapper>
