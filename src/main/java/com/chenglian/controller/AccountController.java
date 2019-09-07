@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -66,7 +67,7 @@ public class AccountController {
      * @return
      */
     @RequestMapping("login")
-    public String login(String account,String password){
+    public String login(String account,String password, HttpSession session){
         Account accountEntity = null;
         try {
             accountEntity = accountServiceImpl.selectByAccountAndPassword(account,password);
@@ -74,8 +75,14 @@ public class AccountController {
             //e.printStackTrace();
         }
         if(null != accountEntity){
+            session.setAttribute("account",accountEntity);
             return "homePage";
         }
         return "forward:/login.jsp";
+    }
+
+    @RequestMapping("accountLogin")
+    public String accountLogin(){
+        return "login";
     }
 }

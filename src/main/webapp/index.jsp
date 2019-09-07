@@ -71,7 +71,7 @@
         </tr>
     </form>
     <tr>
-        <td><p>已有账户<a href="login.jsp">登录</a></p></td>
+        <td><p>已有账户<a href="/account/accountLogin">登录</a></p></td>
     </tr>
 </table>
 

@@ -1,3 +1,4 @@
+package testing;
 import com.chenglian.dao.AccountDao;
 import com.chenglian.entity.Account;
 import org.junit.Test;

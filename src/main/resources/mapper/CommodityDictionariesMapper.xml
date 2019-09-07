@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chenglian.dao.DictionariesDao">
+    <insert id="add" parameterType="CommodityDictionaries">
+        insert into commodity_dictionaries (d_type,number_code,describes) values (#{dType},#{numberCode},#{describes})
+    </insert>
+
+    <select id="selectByNumberCode" resultType="CommodityDictionaries">
+        select d_id,d_type,number_code,describes from commodity_dictionaries where number_code = #{numberCode}
+    </select>
+
+    <select id="numberCode" resultType="CommodityDictionaries">
+        select d_id,d_type,number_code,describes from commodity_dictionaries
+    </select>
+
+    <select id="selectByDType" resultType="CommodityDictionaries">
+        select d_id,d_type,number_code,describes from commodity_dictionaries where d_type = #{dType}
+    </select>
+</mapper>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chenglian.dao.CommodityDao">
+    <insert id="add" parameterType="Commodity">
+        insert into commodity(c_id,c_name,c_type,image,price,sender,state,isdelete,create_time)
+        values(#{cId},#{cName},#{cType},#{image},#{price},#{sender},#{state},#{isdelete},#{createTime})
+    </insert>
+
+    <select id="selectBySender" resultType="Commodity">
+        select * from commodity where sender = #{sender}
+    </select>
+</mapper>

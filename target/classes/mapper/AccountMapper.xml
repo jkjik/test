@@ -3,7 +3,7 @@
 <mapper namespace="com.chenglian.dao.AccountDao">
 
     <insert id="add" parameterType="Account">
-        insert into account (id,account,password,grade,create_time) values (#{id},#{account},#{password},#{grade},#{createTime})
+        insert into account (account,password,grade,create_time) values (#{account},#{password},#{grade},#{createTime})
     </insert>
 
     <select id="selectByAccount" resultType="Account">
