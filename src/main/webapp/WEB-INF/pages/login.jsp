@@ -21,9 +21,18 @@
             })
         })
     </script>
+    <style>
+        body{
+            background: url("/images/pic.jpg") no-repeat;
+            height:100%;
+            width:100%;
+            overflow: hidden;
+            background-size:cover;
+        }
+    </style>
 </head>
 <body>
-<table>
+<table style="background-color:beige;margin: 70px auto;width: 35%; height:200px;text-align: center" align="center">
     <form action="/account/login" method="post">
         <tr>
             <td><p>登录</p></td>

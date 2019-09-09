@@ -9,11 +9,15 @@
         select d_id,d_type,number_code,describes from commodity_dictionaries where number_code = #{numberCode}
     </select>
 
-    <select id="numberCode" resultType="CommodityDictionaries">
+    <select id="selectAll" resultType="CommodityDictionaries">
         select d_id,d_type,number_code,describes from commodity_dictionaries
     </select>
 
     <select id="selectByDType" resultType="CommodityDictionaries">
         select d_id,d_type,number_code,describes from commodity_dictionaries where d_type = #{dType}
+    </select>
+
+    <select id="selectByDescribe" resultType="CommodityDictionaries">
+        select d_id,d_type,number_code,describes from commodity_dictionaries where describes = #{describes}
     </select>
 </mapper>

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by lenovo on 2019/9/4.
@@ -29,5 +30,10 @@ public class AccountServiceImpl implements AccountService{
     @Override
     public Account selectByAccountAndPassword(String account, String password) {
         return accountDaoImpl.selectByAccountAndPassword(account,password);
+    }
+
+    @Override
+    public List<Account> selectAll() {
+        return accountDaoImpl.selectAll();
     }
 }

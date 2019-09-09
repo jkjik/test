@@ -1,5 +1,11 @@
 package com.chenglian.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -15,15 +21,19 @@ public class Commodity {
     private Integer sender;
     private Integer state;
     private Boolean isdelete;
-    private Date createTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Timestamp createTime;
 
     public Commodity() {
    }
 
-    public Commodity(Integer cId, String cName, String cType, Double price, Integer sender, Integer state, Boolean isdelete, Date createTime) {
+    public Commodity(Integer cId, String cName, String cType, byte[] image, Double price, Integer sender, Integer state, Boolean isdelete, Timestamp createTime) {
         this.cId = cId;
         this.cName = cName;
         this.cType = cType;
+        this.image = image;
         this.price = price;
         this.sender = sender;
         this.state = state;
@@ -60,7 +70,7 @@ public class Commodity {
     }
 
 
-    public Date getCreateTime() {
+    public Timestamp getCreateTime() {
         return createTime;
     }
 
@@ -100,7 +110,7 @@ public class Commodity {
         this.isdelete = isdelete;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(Timestamp createTime) {
         this.createTime = createTime;
     }
 

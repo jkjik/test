@@ -1,12 +1,62 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.chenglian.dao.CommodityDao">
-    <insert id="add" parameterType="Commodity">
-        insert into commodity(c_id,c_name,c_type,image,price,sender,state,isdelete,create_time)
-        values(#{cId},#{cName},#{cType},#{image},#{price},#{sender},#{state},#{isdelete},#{createTime})
+    <insert id="add" parameterType="Commodity" useGeneratedKeys="true" keyProperty="id">
+        insert into commodity(c_name,c_type,image,price,sender,state,isdelete,create_time)
+        values(#{cName},#{cType},#{image},#{price},#{sender},#{state},#{isdelete},#{createTime})
     </insert>
 
     <select id="selectBySender" resultType="Commodity">
         select * from commodity where sender = #{sender}
+    </select>
+
+    <select id="selectByCId" resultType="Commodity">
+        select * from commodity where c_id = #{cId}
+    </select>
+
+    <update id="updateAlert" parameterType="Commodity">
+        update commodity set c_name = #{cName} , image = #{image} , price = #{price} where c_id = #{cId}
+    </update>
+
+    <select id="selectPage" resultType="CommodityMapper">
+         select
+         com.c_id,
+         com.c_name,
+         com.c_type,
+         com.price,
+         a.account sender,
+         com.image,
+         com.state,
+         com.isdelete,
+         com.create_time
+         from commodity com JOIN account a
+         on com.sender = a.id
+         where com.state = 0
+         order by com.c_id asc limit #{start},#{size}
+    </select>
+
+    <select id="selectAll" resultType="Commodity">
+         select * from commodity
+    </select>
+
+    <select id="selectDetailedByCId" resultType="CommodityDetailedMapper">
+        select
+         com.c_id,
+         com.c_name,
+         com.c_type,
+         com.price,
+         a.account sender,
+         com.image,
+         com.state,
+         com.isdelete,
+         com.create_time,
+          cd.sign,
+          cd.sign_describes
+         from commodity com
+         JOIN account a
+         on com.sender = a.id
+         JOIN commodity_details cd
+         on com.c_id = cd.c_id
+         where com.c_id = #{cId}
     </select>
 </mapper>
