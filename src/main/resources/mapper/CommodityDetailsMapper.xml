@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chenglian.dao.CommodityDetailsDao">
+    <insert id="add" parameterType="CommodityDetails">
+        insert into commodity_details(c_id,sign,sign_describes,isdelete)values(#{cId},#{sign},#{signDescribes},#{isdelete})
+    </insert>
+</mapper>

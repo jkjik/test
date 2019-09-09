@@ -44,7 +44,16 @@
         })
     }
 </script>
-<table>
+<style>
+    html{
+        background: url("/images/pic.jpg") no-repeat;
+        height:100%;
+        width:100%;
+        overflow: hidden;
+        background-size:cover;
+    }
+</style>
+<table style="background-color:beige;margin: 70px auto;width: 35%; height:200px;text-align: center" align="center">
     <form action="/account/register" id="form" method="post">
         <tr>
             <td><p>注册</p></td>
@@ -71,7 +80,7 @@
         </tr>
     </form>
     <tr>
-        <td><p>已有账户<a href="login.jsp">登录</a></p></td>
+        <td><p>已有账户<a href="/account/accountLogin">登录</a></p></td>
     </tr>
 </table>
 

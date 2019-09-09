@@ -1,5 +1,11 @@
 package com.chenglian.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -10,12 +16,15 @@ public class Account {
     private String account;
     private String password;
     private int grade;
-    private Date createTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Timestamp createTime;
 
     public Account() {
     }
 
-    public Account(Integer id, String account, String password, int grade, Date createTime) {
+    public Account(Integer id, String account, String password, int grade, Timestamp createTime) {
         this.id = id;
         this.account = account;
         this.password = password;
@@ -61,7 +70,7 @@ public class Account {
         this.grade = grade;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(Timestamp createTime) {
         this.createTime = createTime;
     }
 
