@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
  * Created by lenovo on 2019/9/9.
  */
 @Repository
-public class CommodityDetailedMapper {
+public class CommodityDetailedMapper implements Serializable{
     private Integer cId;
     private String cName;
     private String cType;
