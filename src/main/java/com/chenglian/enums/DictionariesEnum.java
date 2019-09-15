@@ -12,7 +12,7 @@ public enum  DictionariesEnum {
     COMPUTER_BRAND(1,"电脑品牌"),
     PHONE_BRAND(2,"手机品牌");
 
-    DictionariesEnum(int code, String describe) {
+    DictionariesEnum(Integer code, String describe) {
         this.code = code;
         this.describe = describe;
     }
@@ -36,7 +36,7 @@ public enum  DictionariesEnum {
         this.describe = describe;
     }
 
-    private static final List<DictionariesResult> resultList = new ArrayList<>();
+  /*  private static final List<DictionariesResult> resultList = new ArrayList<>();
     static {
         for(DictionariesEnum enums:DictionariesEnum.values()){
             resultList.add(new DictionariesResult(enums.getCode(),enums.getDescribe()));
@@ -51,5 +51,16 @@ public enum  DictionariesEnum {
             }
         }
         return codeDescribe;
+    }*/
+
+    public static String getCodeDescribe(Integer code){
+        String describe = null;
+        for(int i=0;i<DictionariesEnum.values().length;i++){
+            DictionariesEnum[] enumsList = DictionariesEnum.values();
+            if(enumsList[i].getCode() == code){
+                describe = enumsList[i].getDescribe();
+            }
+        }
+        return describe;
     }
 }

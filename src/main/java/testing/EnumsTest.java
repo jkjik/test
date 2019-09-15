@@ -1,6 +1,7 @@
 package testing;
 
 import com.chenglian.enums.DictionariesEnum;
+import com.chenglian.enums.TestEnum;
 import com.chenglian.util.EnumsUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,8 +20,14 @@ public class EnumsTest {
     }
     @Test
     public void add(){
-        EnumsUtils.addEnum(DictionariesEnum.class,"PROPERTY"
+        EnumsUtils.addEnum(TestEnum.class,"PROPERTY"
                 ,new Class[]{java.lang.Integer.class,java.lang.String.class}
                 ,new Object[]{4,"配置"});
+        for (TestEnum enums : TestEnum.values()) {
+            System.out.println(enums);
+            System.out.println(enums.getCode());
+            System.out.println(enums.getDescribe());
+        }
+        System.out.println(TestEnum.getCodeDescribe(4));
     }
 }

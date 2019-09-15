@@ -12,6 +12,7 @@ import com.chenglian.service.DictionariesService;
 import com.chenglian.util.BytesToFile;
 import com.chenglian.util.FileToBlob;
 import com.chenglian.entity.CommodityDetailedMapper;
+import com.chenglian.util.RedisUtils;
 import com.chenglian.vo.CommodityView;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,8 @@ public class CommodityController {
     private DictionariesService dictionariesServiceImpl;
     @Autowired
     private CommodityDetailsService commodityDetailsServiceImpl;
+    @Autowired
+    private RedisUtils redisUtils;
     @InitBinder
     public void initBinder(ServletRequestDataBinder binder){
         binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("YYYY-MM-DD HH:MM:SS"),
@@ -157,18 +160,29 @@ public class CommodityController {
         return "commodityPage";
     }
 
+    /**
+     * 使用缓存
+     * @param request
+     * @param map
+     * @return
+     */
     @RequestMapping("detailed")
     public String detailed(HttpServletRequest request,ModelMap map){
         String id = request.getParameter("cId");
         Integer cId = null;
+        CommodityDetailedMapper commodityDetailedMapper =  null;
         try {
              cId= Integer.valueOf(id);
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         if(null != cId){
-            CommodityDetailedMapper commodityDetailedMapper =    commodityServiceImpl.selectDetailedByCId(cId);
-            System.out.println(commodityDetailedMapper);
+            if(redisUtils.hasKay(id)){
+                   commodityDetailedMapper = (CommodityDetailedMapper) redisUtils.get(id);
+            }else {
+              commodityDetailedMapper =    commodityServiceImpl.selectDetailedByCId(cId);
+              redisUtils.set(id,commodityDetailedMapper);
+            }
             map.addAttribute("commodityDetailedMapper",commodityDetailedMapper);
         }
         return "commodityDetailedPage";
